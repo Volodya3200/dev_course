@@ -21,5 +21,5 @@ jobs:
       - name: Build the Docker image
         run: docker build -t course_image python/. --tag my-image-name:$(date +%s)
       - name: Deploy the Docker image
-        run: docker run -d --name python-app 
+        run: docker run -d --name python-app course-image
       
