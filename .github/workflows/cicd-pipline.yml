@@ -1,0 +1,25 @@
+name: CI/CD pipline
+
+on:
+  push:
+    branches: [ "main" ,"develop"  ]
+  pull_request:
+    branches: [ "develop" ]
+  
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: tests
+        run: echo "------------Tests------------"
+
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build -t course_image python/. 
+      - name: Deploy the Docker image
+        run: docker run -d -p 127.0.0.2:80:80 docker.io/library/course_image
+      
