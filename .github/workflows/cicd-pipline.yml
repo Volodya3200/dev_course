@@ -19,7 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build -t course_image . --tag my-image-name:$(date +%s)
+        run: docker build -t course_image python/. --tag my-image-name:$(date +%s)
       - name: Deploy the Docker image
         run: docker run -d --name python-app 
       
