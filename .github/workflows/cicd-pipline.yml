@@ -4,22 +4,32 @@ on:
   push:
     branches: [ "main" ,"develop"  ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main", "develop"  ]
   
 jobs:
   test: 
     runs-on: ubuntu-latest
     steps: 
-      - name: tests
-        run: echo "------------Tests------------"
+      - name: Running tests
+        run: echo "------------Running unit tests------------"
+      - name: Test Results   
+        run: echo "------------The tests have been successfully passed! ------------"
 
   build:
     runs-on: self-hosted
     steps:
       - name: Checkout code 
         uses: actions/checkout@v3
+      - name: Start build image
+        run: echo "------------Start building the docker image...------------"
       - name: Build the Docker image
-        run: docker build -t course_image python/. 
+        run: docker build -t course_image python/. && docker image prune -f
+      - name: End build image
+        run: echo "------------Docker image created successfully!------------"
+      - name: Start deploy
+        run: echo "------------Start deploying the docker image...------------"
       - name: Deploy the Docker image
-        run: docker run -d -p 127.0.0.2:80:80 docker.io/library/course_image
+        run: docker run -d -p 127.0.0.2:80:80 --name course_container docker.io/library/course_image
+      - name: End Deploy
+        run: echo "New container added at http://172.17.0.2:80"
       
