@@ -26,6 +26,9 @@ jobs:
         run: docker build -t course_image python/. && docker image prune -f
       - name: End build image
         run: echo "------------Docker image created successfully!------------"
+  deploy:
+    runs-on: self-hosted
+    steps:
       - name: Start deploy
         run: echo "------------Start deploying the docker image...------------"
       - name: Deploy the Docker image
