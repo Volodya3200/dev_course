@@ -34,5 +34,5 @@ jobs:
       - name: Deploy the Docker image
         run: docker run -d -p 127.0.0.2:80:80 --name course_container docker.io/library/course_image
       - name: End Deploy
-        run: echo "New container added at http://172.17.0.2:80"
+        run: echo "New container added at http://127.0.0.2:80"
       
