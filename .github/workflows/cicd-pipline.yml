@@ -34,6 +34,6 @@ jobs:
       - name: Start deploy
         run: echo "------------Start deploying the docker image...------------"
       - name: Deploy the Docker image
-        run:  docker rm -f $(docker ps -a -q) && docker run -d -p 127.0.0.2:80:80 --name course_container docker.io/library/course_image
+        run:  docker rm -f $(docker ps -a -q) || docker run -d -p 127.0.0.2:80:80 --name course_container docker.io/library/course_image
       - name: End Deploy
         run: echo "New container added at http://127.0.0.2:80"
