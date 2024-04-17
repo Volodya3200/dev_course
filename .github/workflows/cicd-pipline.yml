@@ -26,7 +26,7 @@ jobs:
       - name: Build the Docker image
         run: docker build -t vvzlssk32/course-image-repo:latest python/. && docker image prune -f
       - name: Login to the DockerHub
-        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
       - name: Push the Docker image to the DockerHub
         run: docker push vvzlssk32/course-image-repo:latest
       - name: End build the Docker image
