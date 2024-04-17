@@ -41,7 +41,7 @@ jobs:
       - name: Start deploy the Docker image
         run: echo "------------Start deploying the docker image...------------"
       - name: Deploy the Docker image
-        run:  docker rm -f $(docker ps -a -q) 
+        run:  docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
       - name: Preparation and cleanup for deploy 
         run: docker run -d -p 127.0.0.2:80:80 --name course_container vvzlssk32/course-image-repo:latest  
       - name: End deploy the Docker image
