@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Running tests
-        run: echo "------------Running unit tests------------"
+        run: echo "------------Running unit tests...------------"
       - name: Test Results   
         run: echo "------------The tests have been successfully passed! ------------"
 
@@ -21,19 +21,23 @@ jobs:
     steps:
       - name: Checkout code 
         uses: actions/checkout@v3
-      - name: Start build image
+      - name: Start build the Docker image
         run: echo "------------Start building the docker image...------------"
       - name: Build the Docker image
-        run: docker build -t course_image python/. && docker image prune -f
-      - name: End build image
+        run: docker build -t vvzlssk32/course-image-repo:latest python/. && docker image prune -f
+      - name: Login to the DockerHub
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - name: Push the Docker image to the DockerHub
+        run: docker push vvzlssk32/course-image-repo:latest
+      - name: End build the Docker image
         run: echo "------------Docker image created successfully!------------"
   deploy:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Start deploy
+      - name: Start deploy the Docker image
         run: echo "------------Start deploying the docker image...------------"
       - name: Deploy the Docker image
-        run:  docker rm -f $(docker ps -a -q) || docker run -d -p 127.0.0.2:80:80 --name course_container docker.io/library/course_image
-      - name: End Deploy
+        run:  docker rm -f $(docker ps -a -q) || docker run -d -p 127.0.0.2:80:80 --name course_container vvzlssk32/course-image-repo:latest      - name: End Deploy
+      - name: End deploy the Docker image
         run: echo "New container added at http://127.0.0.2:80"
