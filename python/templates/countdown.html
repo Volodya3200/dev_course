@@ -1,0 +1,35 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .countdown {
+            font-size: 2em;
+            color: #ff6347;
+        }
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 >КУРСОВОЕ ПРОЕКТИРОВАНИЕ. ЗАЛЕССКИЙ ВЛАДИМИР, БГУИР!!!</h1>
+        <h2>Обратный отсчет до сдачи курсового проектирования</h2>
+        <p class="countdown">Осталось дней до сдачи: {{ days }}</p>
+        <img src="{{ image_url }}" alt="Image" class = "center" >
+    </div>
+</body>
+</html>

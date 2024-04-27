@@ -42,7 +42,7 @@ jobs:
         run: echo "------------Start deploying the docker image...------------"
       - name: Preparation and cleanup for deploy
         run:  docker rm -f $(docker ps -a -q) || echo "No containers available for cleaning"
-      - name: Deploy the Docker image
+      - name: Deploy the Docker image 
         run: docker run -d -p 127.0.0.2:80:80 --name course_container vvzlssk32/course-image-repo:latest  
       - name: End deploy the Docker image
         run: echo "New container added at http://127.0.0.2:80"
